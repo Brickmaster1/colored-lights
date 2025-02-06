@@ -1,9 +1,12 @@
 package dev.gegy.colored_lights.render.particle;
 
+import net.caffeinemc.mods.sodium.api.vertex.buffer.VertexBufferWriter;
+import net.caffeinemc.mods.sodium.api.vertex.format.VertexFormatDescription;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.util.math.MathHelper;
-
-public final class ColoredParticleVertexConsumer implements VertexConsumer, AutoCloseable {
+import org.lwjgl.system.MemoryStack;
+                                                                                         //TODO: THIS WILL CRASH WITHOUT SODIUM!!!
+public final class ColoredParticleVertexConsumer implements VertexConsumer, AutoCloseable, VertexBufferWriter {
     private VertexConsumer parent;
     private float redLight;
     private float greenLight;
@@ -113,5 +116,10 @@ public final class ColoredParticleVertexConsumer implements VertexConsumer, Auto
     @Override
     public void unfixColor() {
         this.parent.unfixColor();
+    }
+
+    @Override
+    public void push(MemoryStack memoryStack, long l, int i, VertexFormatDescription vertexFormatDescription) {
+
     }
 }
